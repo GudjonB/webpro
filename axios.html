@@ -18,37 +18,15 @@
         request will fail, since the domain does not exist/does not answer our request.</p>
     <br>
     <!-- Clicking this button calls doAjax(), which will do an AJAX request -->
-    <button type="button" onclick="doAjax()">Click to do AJAX</button>
+    <select id="difficulty">
+        <option value="easy" selected="selected">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    <button type="button" onclick="getInput()">Click to Get Sudoku Board</button>
     <div id="sudokuDiv">
         <p id="sudokuBoard"></p>
     </div>
-    <script>
-        function doAjax() {
-            var Board;
-            //Prepare the parameter value for 'myParam'
-            var paramValue = "easy";
-
-            //The URL to which we will send the request
-            var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku';
-
-            //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
-            axios.post(url, { difficulty: paramValue })
-                .then(function (response) {
-                    //When successful, print 'Success: ' and the received data
-                    console.log("Success: ", response.data.Board);
-                    Board = response.data;
-                })
-                .catch(function (error) {
-                    //When unsuccessful, print the error.
-                    console.log(error);
-                })
-                .then(function () {
-                    // This code is always executed, independent of whether the request succeeds or fails.
-                    document.getElementById("sudokuBoard").innerHTML = Board.board.boxes[0];
-                    document.getElementById("sudokuBoard").innerHTML = Board.board.boxes[1];
-                });
-        }
-    </script>
 </body>
 
 </html>
