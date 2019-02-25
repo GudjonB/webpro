@@ -1,4 +1,4 @@
-var game = {boxes:"", _id:"", difficulty:"", dateGenerated:""};
+var game = {boxes:"", _id: "", difficulty: "", dateGenerated: ""};
 
 function getSudoku(setting) {
 
@@ -7,37 +7,53 @@ function getSudoku(setting) {
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
     axios.post(url, { difficulty: setting })
-        .then(function (response) {
-            //When successful, print 'Success: ' and the received data
-            console.log("Success: ", response.data);
-            game = response.data;
-        })
-        .catch(function (error) {
-            //When unsuccessful, print the error.
-            console.log(error);
-            if (setting == 'easy') {
-                game.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
-                            [4,2,9,6,5,7,3,1,8],['.','.',8,2,3,1,9,4,7],[7,1,3,8,4,9,5,2,6],
-                            ['.','.',6,'.',3,5,8,4,2],[4,2,3,7,8,9,1,'.','.'],['.',5,8,2,6,4,9,3,7]];
-                game._id = "default-easy";
-            } else if (setting = 'medium') {
-                game.boxes = [[8,7,'.','.',4,'.',6,2,5],[4,5,'.','.',2,'.','.',1,'.'],[2,1,'.',8,5,'.','.',9,'.'],
-                            [7,6,'.',5,'.',4,'.',8,'.'],[9,3,1,8,6,2,5,'.',7],[5,4,8,3,'.',1,9,6,2],
-                            [2,'.',7,9,5,8,4,'.',6],['.',9,4,6,7,3,2,'.',5],['.','.',5,1,'.',4,'.','.','.']];
-                game._id = "default-medium";
-                
-            } else if (setting = 'hard') {
-                game.boxes = [[4,'.','.',9,'.','.','.','.','.'],['.','.','.','.',4,'.','.','.','.'],[5,3,9,6,'.',1,7,'.',4],
-                            ['.',9,6,'.',4,7,'.','.','.'],['.',7,8,5,'.',2,1,9,6],[2,5,3,9,1,6,8,4,7],
-                            ['.','.',1,'.',8,4,2,'.','.'],['.',8,'.','.','.','.','.',5,4],[4,'.',2,3,'.',5,1,7,8]];
-                game._id = "default-hard";
-            }
-
+    
+    .then(function (response) {
+        //When successful, print 'Success: ' and the received data
+        console.log("Success: ", response.data);
+        game = response.data;
+    })
+    .catch(function (error) {
+        //When unsuccessful, print the error.
+        console.log(error);
+        if (setting == 'easy') {
+            game.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
+                        [4,2,9,6,5,7,3,1,8],['.','.',8,2,3,1,9,4,7],[7,1,3,8,4,9,5,2,6],
+                        ['.','.',6,'.',3,5,8,4,2],[4,2,3,7,8,9,1,'.','.'],['.',5,8,2,6,4,9,3,7]];
+            game._id = "default-easy";
+        } else if (setting = 'medium') {
+            game.boxes = [[8,7,'.','.',4,'.',6,2,5],[4,5,'.','.',2,'.','.',1,'.'],[2,1,'.',8,5,'.','.',9,'.'],
+                          [7,6,'.',5,'.',4,'.',8,'.'],[9,3,1,8,6,2,5,'.',7],[5,4,8,3,'.',1,9,6,2],
+                          [2,'.',7,9,5,8,4,'.',6],['.',9,4,6,7,3,2,'.',5],['.','.',5,1,'.',4,'.','.','.']];
+            game._id = "default-medium";
+            
+        } else if (setting = 'hard') {
+            game.boxes = [[4,'.','.',9,'.','.','.','.','.'],['.','.','.','.',4,'.','.','.','.'],[5,3,9,6,'.',1,7,'.',4],
+                          ['.',9,6,'.',4,7,'.','.','.'],['.',7,8,5,'.',2,1,9,6],[2,5,3,9,1,6,8,4,7],
+                          ['.','.',1,'.',8,4,2,'.','.'],['.',8,'.','.','.','.','.',5,4],[4,'.',2,3,'.',5,1,7,8]];
+            game._id = "default-hard";
+        }
         game.difficulty = setting;
         dateGenerated = new Date();
     })
     .then(function (){
         document.getElementById("sudokuDiv").style.display = "inline";
+        var br = document.createElement("br");
+        for (var j = 0; j < 9; j++){
+            for ( var i = 0; i < 9; i++){
+                let newinputbox = document.createElement("input");
+                newinputbox.setAttribute("type", "text");
+                if(game.board.boxes[i][j] === '.'){
+                    newinputbox.setAttribute("value", "")
+                    document.getElementById("sudokuBoard").appendChild(newinputbox);
+                }
+                else {
+                    newinputbox.setAttribute("value", game.board.boxes[i][j])
+                    document.getElementById("sudokuBoard").appendChild(newinputbox);
+                }
+            }
+        document.getElementById("sudokuBoard").appendChild(br);
+        }
     });
 }  
 
