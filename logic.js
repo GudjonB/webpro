@@ -32,6 +32,7 @@ function getSudoku(setting) {
                             ['.','.',1,'.',8,4,2,'.','.'],['.',8,'.','.','.','.','.',5,4],[4,'.',2,3,'.',5,1,7,8]];
                 game._id = "default-hard";
             }
+
         game.difficulty = setting;
         dateGenerated = new Date();
     })
