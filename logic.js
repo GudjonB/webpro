@@ -36,7 +36,9 @@ function getSudoku(setting) {
         game.difficulty = setting;
         dateGenerated = new Date();
     })
-    return game;
+    .then(function (){
+        document.getElementById("sudokuDiv").style.display = "inline";
+    });
 }  
 
 function getInput(){
