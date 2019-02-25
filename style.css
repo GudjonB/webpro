@@ -6,4 +6,5 @@ p#sudokuBoard {  /* eitthvað til að vinna með */
     vertical-align: middle;
     font-weight: bold;
     color: #3c3;
+    display: none;
 }

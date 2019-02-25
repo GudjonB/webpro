@@ -1,4 +1,4 @@
-var game = {boxes: Array(9), _id: "", difficulty = "", dateGenerated: ""};
+var game = {boxes:"", _id: "", difficulty: "", dateGenerated: ""};
 
 function getSudoku(setting) {
 
@@ -8,7 +8,7 @@ function getSudoku(setting) {
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
     axios.post(url, { difficulty: setting })
     
-    then(function (response) {
+    .then(function (response) {
         //When successful, print 'Success: ' and the received data
         console.log("Success: ", response.data);
         game = response.data;
