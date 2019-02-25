@@ -23,13 +23,13 @@
     <script>
         function doAjax() {
             //Prepare the parameter value for 'myParam'
-            var paramValue = "someValue";
+            var paramValue = "easy";
 
             //The URL to which we will send the request
-            var url = 'http://someinvaliddomain.is';
+            var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku';
 
             //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
-            axios.post(url, { myParam: paramValue })
+            axios.post(url, { difficulty: paramValue })
                 .then(function (response) {
                     //When successful, print 'Success: ' and the received data
                     console.log("Success: ", response.data);
