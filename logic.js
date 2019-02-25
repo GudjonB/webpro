@@ -1,6 +1,6 @@
 var game = {boxes: Array(9), _id: "", difficulty = "", dateGenerated: ""};
 
-function getSudokuBoard(setting) {
+function getSudoku(setting) {
 
     
 
@@ -37,11 +37,6 @@ function getSudokuBoard(setting) {
         }
         game.difficulty = setting;
         dateGenerated = new Date();
-
     })
-    .then(function () {
-        // This code is always executed, independent of whether the request succeeds or fails.
-    });
-
     return game;
 }
