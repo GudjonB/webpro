@@ -2,8 +2,6 @@ var game = {boxes: Array(9), _id: "", difficulty = "", dateGenerated: ""};
 
 function getSudoku(setting) {
 
-    
-
     //The URL to which we will send the request
     var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku';
 
@@ -39,4 +37,9 @@ function getSudoku(setting) {
         dateGenerated = new Date();
     })
     return game;
+}  
+
+function getInput(){
+    var setting = document.getElementById("difficultySelection").value;
+    getSudoku(setting);
 }
