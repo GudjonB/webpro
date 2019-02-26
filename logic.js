@@ -69,6 +69,11 @@ function getSudoku(setting) {
     });
 }  
 
+function validate() { /* storing numbers and comparing later */
+    var input = document.getElementById("00").value;
+    alert(input);
+}
+
 
 function getInput(){
     document.getElementById("sudokuBoard").textContent = "";
