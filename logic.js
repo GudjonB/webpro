@@ -37,27 +37,64 @@ function getSudoku(setting) {
         dateGenerated = new Date();
     })
     .then(function (){
-        document.getElementById("sudokuDiv").style.display = "inline";
+        document.getElementById("sudokuDiv").style.display = "table";
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
         var br = document.createElement("br");
-        for (var j = 0; j < 9; j++){
-            for ( var i = 0; i < 9; i++){
-                let newinputbox = document.createElement("input");
-                newinputbox.setAttribute("type", "text");
-                if(game.board.boxes[i][j] === '.'){
-                    newinputbox.setAttribute("value", "")
-                    document.getElementById("sudokuBoard").appendChild(newinputbox);
+        
+        for(var i = 0; i < 9; i++){
+            var div = document.createElement("div");
+            div.setAttribute("id",(String)(i)+" Box")
+            document.getElementById("sudokuBoard").appendChild(div);
+            for(var j = 0; j < 3; j++){
+                for(var k = 0; k < 3; k++){
+                        let newinputbox = document.createElement("input");
+                        newinputbox.setAttribute("type", "text");
+                        newinputbox.setAttribute("id", (String)(i)+(String)(j*3+k));
+                        newinputbox.setAttribute("class", i);
+                        if(game.board.boxes[i][j*3+k] === '.'){
+                            newinputbox.setAttribute("value", "");
+                            document.getElementById((String)(i)+" Box").appendChild(newinputbox);
+                        }
+                        else {
+                            newinputbox.setAttribute("disabled",true);
+                            newinputbox.setAttribute("value", game.board.boxes[i][j*3+k]);
+                            document.getElementById((String)(i)+" Box").appendChild(newinputbox);
+                        }
                 }
-                else {
-                    newinputbox.setAttribute("value", game.board.boxes[i][j])
-                    document.getElementById("sudokuBoard").appendChild(newinputbox);
-                }
+                document.getElementById("sudokuBoard").appendChild(br);
             }
-        document.getElementById("sudokuBoard").appendChild(br);
+            document.getElementById("sudokuBoard").appendChild(br);
         }
     });
 }  
 
+
 function getInput(){
     var setting = document.getElementById("difficultySelection").value;
     getSudoku(setting);
+
+
+
+
+    // document.getElementById("sudokuDiv").style.display = "inline";
+    //         var tr = document.createElement("tr");
+    //         var td = document.createElement("td");
+    //         for (var i = 0; i < 2; i++){
+    //             document.getElementById("sudokuBoard").appendChild(div);
+    //             for ( var j = 0; j < 9; j++){
+    //                 let newinputbox = document.createElement("input");
+    //                 newinputbox.setAttribute("type", "text");
+    //                 newinputbox.setAttribute("id", (String)(i)+(String)(j));
+    //                 newinputbox.setAttribute("class", i;
+    //                 if(game.board.boxes[i][j] === '.'){
+    //                     newinputbox.setAttribute("value", "")
+    //                     document.getElementById("sudokuBoard").appendChild(newinputbox);
+    //                 }
+    //                 else {
+    //                     newinputbox.setAttribute("value", game.board.boxes[i][j])
+    //                     document.getElementById("sudokuBoard").appendChild(newinputbox);
+    //                 }
+    //             }
+    //         }
 }
