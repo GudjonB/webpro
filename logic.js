@@ -70,8 +70,11 @@ function getSudoku(setting) {
 }  
 
 function validate() { /* storing numbers and comparing later */
-    var input = document.getElementById("00").value;
-    alert(input);
+    var input = 0;
+    for(var i = 0; i < 9; i++){
+        input += Number(document.getElementById("0"+i).value); /* stores the sum of the first box*/
+    } /* we can compare each box with 45 (1+2+3..+9) when user checks if he's right */
+    alert(input); /* alert message  */
 }
 
 
