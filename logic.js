@@ -3,7 +3,7 @@ var game = {board:{boxes:""}, _id: "", difficulty: "", dateGenerated: ""};
 function getSudoku(setting) {
 
     //The URL to which we will send the request
-    var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudok';
+    var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku';
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
     axios.post(url, { difficulty: setting })
@@ -37,7 +37,7 @@ function getSudoku(setting) {
         dateGenerated = new Date();
     })
     .then(function (){
-        document.getElementById("sudokuDiv").style.display = "table";
+        document.getElementById("sudokuBoard").style.display = "flex";
         var tr = document.createElement("tr");
         var td = document.createElement("td");
         var br = document.createElement("br");
@@ -71,6 +71,7 @@ function getSudoku(setting) {
 
 
 function getInput(){
+    document.getElementById("sudokuBoard").textContent = "";
     var setting = document.getElementById("difficultySelection").value;
     getSudoku(setting);
 
