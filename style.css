@@ -38,12 +38,17 @@ input {
     border-color: black;
 }
 #resultMsg {
-
+    width: 320px;
+    align-content: center;
     margin:0 auto;
     border: none;
 }
 #WMsg {
     display: none;
+    width: 320px;
     text-align: center;
     font-size: 3em;
+}
+#sudokuId{
+    display: none;
 }
