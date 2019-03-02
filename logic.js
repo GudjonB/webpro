@@ -113,3 +113,68 @@ function getInput(){
     //             }
     //         }
 }
+
+game.board.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
+[4,2,9,6,5,7,3,1,8],['.','.',8,2,3,1,9,4,7],[7,1,3,8,4,9,5,2,6],
+['.','.',6,'.',3,5,8,4,2],[4,2,3,7,8,9,1,'.','.'],['.',5,8,2,6,4,9,3,7]];
+game._id = "default-easy";
+
+function checkBox(box, index) {
+    var check_digit = game.boxes[box][index];
+    for (var i=0; i<9; i++) {
+        if (game.boxes[box][i] == check_digit && index != i) {
+            return [index, i];
+        }
+    }
+    return [-1,-1];
+}
+
+function checkEmpty(box, index) {
+    if (game.boxes[box][index] == '') {
+        return true;
+    }
+}
+  
+function checkBox(box, index) {
+    var check_digit = game.boxes[box][index];
+    for (var i=0; i<9; i++) {
+        if (game.boxes[box][i] == check_digit && index != i) {
+            return index, i;
+        }
+    }
+    return -1;
+}
+  
+
+function checkRow(box, index) {
+    var check_digit = game.boxes[box][index];
+    var row_num = Math.floor(box/3)*3+Math.floor(index/3);
+    for (var i=0; i<3; i++) {
+        for (var j=0; j<3; j++) {
+            var _box = i+Math.floor(row_num/3)*3;
+            var _index = j+(row_num%3)*3;
+            console.log(_box + "," + _index + " = " + game.boxes[_box][_index] + ",   " + check_digit );
+            if (check_digit == game.boxes[_box][_index] && (_box == box && _index == index)) {
+                return [box, index, _box, _index];
+            } 
+        }
+    }
+    return -1;
+}
+  
+function checkCol(box, index) {
+    var check_digit = game.boxes[box][index];
+    var col_num = (box%3)*3+(index%3);
+    for (var i=0; i<3; i++) {
+        for (var j=0; j<3; j++) {
+            var _box = i*3+col_num%3;
+            var _index = j*3+col_num%3;
+            console.log(_box + "," + _index + " = " + game.boxes[_box][_index] + ",   " + check_digit);
+            if (check_digit == game.boxes[_box][_index]) {
+                return [box, index, _box, _index];
+            }
+        }
+    }
+    return -1;
+}
+
