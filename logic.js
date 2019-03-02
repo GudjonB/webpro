@@ -18,18 +18,18 @@ function getSudoku(setting) {
         //When unsuccessful, print the error.
         console.log(error);
         if (setting == 'easy') {
-            game.board.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
+            game.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
                         [4,2,9,6,5,7,3,1,8],['.','.',8,2,3,1,9,4,7],[7,1,3,8,4,9,5,2,6],
                         ['.','.',6,'.',3,5,8,4,2],[4,2,3,7,8,9,1,'.','.'],['.',5,8,2,6,4,9,3,7]];
             game.sudokuId = "-1";
         } else if (setting = 'medium') {
-            game.board.boxes = [[8,7,'.','.',4,'.',6,2,5],[4,5,'.','.',2,'.','.',1,'.'],[2,1,'.',8,5,'.','.',9,'.'],
+            game.boxes = [[8,7,'.','.',4,'.',6,2,5],[4,5,'.','.',2,'.','.',1,'.'],[2,1,'.',8,5,'.','.',9,'.'],
                           [7,6,'.',5,'.',4,'.',8,'.'],[9,3,1,8,6,2,5,'.',7],[5,4,8,3,'.',1,9,6,2],
                           [2,'.',7,9,5,8,4,'.',6],['.',9,4,6,7,3,2,'.',5],['.','.',5,1,'.',4,'.','.','.']];
             game.sudokuId = "-1";
             
         } else if (setting = 'hard') {
-            game.board.boxes = [[4,'.','.',9,'.','.','.','.','.'],['.','.','.','.',4,'.','.','.','.'],[5,3,9,6,'.',1,7,'.',4],
+            game.boxes = [[4,'.','.',9,'.','.','.','.','.'],['.','.','.','.',4,'.','.','.','.'],[5,3,9,6,'.',1,7,'.',4],
                           ['.',9,6,'.',4,7,'.','.','.'],['.',7,8,5,'.',2,1,9,6],[2,5,3,9,1,6,8,4,7],
                           ['.','.',1,'.',8,4,2,'.','.'],['.',8,'.','.','.','.','.',5,4],[4,'.',2,3,'.',5,1,7,8]];
             game.sudokuId = "-1";
@@ -53,13 +53,13 @@ function getSudoku(setting) {
                         newinputbox.setAttribute("type", "text");
                         newinputbox.setAttribute("id", (String)(i)+(String)(j*3+k));
                         newinputbox.setAttribute("class", i);
-                        if(game.board.boxes[i][j*3+k] === '.'){
+                        if(game.boxes[i][j*3+k] === '.'){
                             newinputbox.setAttribute("value", "");
                             document.getElementById((String)(i)+" Box").appendChild(newinputbox);
                         }
                         else {
                             newinputbox.setAttribute("disabled",true);
-                            newinputbox.setAttribute("value", game.board.boxes[i][j*3+k]);
+                            newinputbox.setAttribute("value", game.boxes[i][j*3+k]);
                             document.getElementById((String)(i)+" Box").appendChild(newinputbox);
                         }
                 }
@@ -84,7 +84,6 @@ function validate() { /* storing numbers and comparing later */
     }
 }
 
-
 function getInput(){
     document.getElementById("sudokuBoard").textContent = "";
     var setting = document.getElementById("difficultySelector").value;
@@ -94,67 +93,106 @@ function getInput(){
 
 // EHJ - Experimental shit
 
-game.board.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
+game.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
 [4,2,9,6,5,7,3,1,8],['.','.',8,2,3,1,9,4,7],[7,1,3,8,4,9,5,2,6],
 ['.','.',6,'.',3,5,8,4,2],[4,2,3,7,8,9,1,'.','.'],['.',5,8,2,6,4,9,3,7]];
 
-function checkBox(box, index) {
-    var check_digit = game.board.boxes[box][index];
-    for (var i=0; i<9; i++) {
-        if (game.board.boxes[box][i] == check_digit && index != i) {
-            return [index, i];
+function validateGame(board) {
+    for (var i = 0; i < 9; i++) {
+        for (var j = 0; j < 9; j++) {
+            if (checkEmpty(board[i][j])) {
+                //color yellow
+                console.log("cell(" + i + ", " + j + ") colored yellow");
+                continue;
+            }
+            if (!(checkLegalDigit(board[i][j]) || !checkBox(board[i][j]) || !checkCol(board[i][j]) || !checkRow(board[i][j]))) {
+                //color red
+                console.log("cell(" + i + ", " + j + ") colored red");
+            }
         }
     }
-    return [-1,-1];
+
 }
 
+// If the empty string is in location box, index, the function returns true
 function checkEmpty(box, index) {
-    if (game.board.boxes[box][index] == '') {
+    if (game.boxes[box][index] == '') {
         return true;
     }
+    return false;
 }
-  
+
+function checkLegalDigit(box, index) {
+    // The digit is stored
+    var check_digit = game.boxes[box][index];
+    // Then the digit is checked whether it is legal or not
+    if (Number.isInteger(check_digit) && (0 < check_digit < 10)) {
+        return true;
+    }
+    return false;
+}
+
+// Iterates through all the indexes of the box and checks whether a duplicate
+// number exists in the box
 function checkBox(box, index) {
-    var check_digit = game.board.boxes[box][index];
+    // The digit is stored
+    var check_digit = game.boxes[box][index];
+    // Each digit in the calculated row is iterated over and checked whether a
+    // duplicate digit exists
     for (var i=0; i<9; i++) {
-        if (game.board.boxes[box][i] == check_digit && index != i) {
-            return index, i;
+        // if a duplicate digit exists false is returned
+        if (game.boxes[box][i] == check_digit && index != i) {
+            return false;
         }
     }
-    return -1;
+    // if no duplicate is found true is returned
+    return true;
 }
   
-
+// Takes the box number and the index of the digit and checks whether a
+// duplicate digit exists in the row
 function checkRow(box, index) {
-    var check_digit = game.board.boxes[box][index];
+    // The digit is stored
+    var check_digit = game.boxes[box][index];
+    // The number of the row is calculated
     var row_num = Math.floor(box/3)*3+Math.floor(index/3);
+    // Each digit in the calculated row is iterated over and checked whether a
+    // duplicate digit exists
     for (var i=0; i<3; i++) {
         for (var j=0; j<3; j++) {
             var _box = i+Math.floor(row_num/3)*3;
             var _index = j+(row_num%3)*3;
-            console.log(_box + "," + _index + " = " + game.board.boxes[_box][_index] + ",   " + check_digit );
-            if (check_digit == game.board.boxes[_box][_index] && (_box == box && _index == index)) {
-                return [box, index, _box, _index];
+                // debug console.log(_box + "," + _index + " = " + game.boxes[_box][_index] + ",   " + check_digit );
+            // if a duplicate digit exists false is returned
+            if (check_digit == game.boxes[_box][_index] && !(_box == box && _index == index)) {
+                return false;
             } 
         }
     }
-    return -1;
+    // if no duplicate is found true is returned
+    return true;
 }
-  
+
+// Takes the box number and the index of the digit and checks whether a
+// duplicate digit exists in the row
 function checkCol(box, index) {
-    var check_digit = game.board.boxes[box][index];
+    // The digit is stored
+    var check_digit = game.boxes[box][index];
+    // The number of the row is calculated
     var col_num = (box%3)*3+(index%3);
+    // Each digit in the calculated row is iterated over and checked whether a
+    // duplicate digit exists
     for (var i=0; i<3; i++) {
         for (var j=0; j<3; j++) {
             var _box = i*3+col_num%3;
             var _index = j*3+col_num%3;
-            console.log(_box + "," + _index + " = " + game.board.boxes[_box][_index] + ",   " + check_digit);
-            if (check_digit == game.board.boxes[_box][_index]) {
-                return [box, index, _box, _index];
+            // debug console.log(_box + "," + _index + " = " + game.boxes[_box][_index] + ",   " + check_digit);
+            // if a duplicate digit exists false is returned
+            if (check_digit == game.boxes[_box][_index] && !(_box == box && _index == index)) {
+                return false;
             }
         }
-    }
-    return -1;
+    }    
+    // if no duplicate is found true is returned
+    return true;
 }
-
-
