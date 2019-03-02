@@ -74,7 +74,7 @@ function getSudoku(setting) {
 function validate() { /* storing numbers and comparing later */
     getBoard();
     validateGame();
-    color();
+    backgroundcolorReset();
     
 }
 function getBoard(){
@@ -86,7 +86,7 @@ function getBoard(){
         }
     }
 }
-function color() {
+function backgroundcolorReset() {
     setTimeout(function(){ /* 5 seconds after we push the validation button we change background color to original */
         for (let i = 0; i < 9; i++){
             for (let j = 0; j < 9; j++){
