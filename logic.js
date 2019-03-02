@@ -46,7 +46,7 @@ function getSudoku(setting) {
             for(var j = 0; j < 3; j++){
                 for(var k = 0; k < 3; k++){
                         let newinputbox = document.createElement("input");
-                        newinputbox.setAttribute("type", "text");
+                        newinputbox.setAttribute("type", "number");
                         newinputbox.setAttribute("id", "cell"+(String)(i)+(String)(j*3+k));
                         newinputbox.setAttribute("class", i);
                         if(game.boxes[i][j*3+k] === '.'){
@@ -80,7 +80,7 @@ function getBoard(){
     for (let i = 0; i < 9; i++){
         for (let j = 0; j < 9; j++){
             var cell = document.getElementById("cell"+i+j);
-            game.boxes[i][j] = cell.value;
+            game.boxes[i][j] = (Number)(cell.value);
         }
     }
 }
@@ -94,22 +94,23 @@ function getInput(){
 
 // EHJ - Experimental shit
 
-// game.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
-// [4,2,9,6,5,7,3,1,8],['.','.',8,2,3,1,9,4,7],[7,1,3,8,4,9,5,2,6],
-// ['.','.',6,'.',3,5,8,4,2],[4,2,3,7,8,9,1,'.','.'],['.',5,8,2,6,4,9,3,7]];
-
 function validateGame() {
-    for (var i = 0; i < 1; i++) {
+    var gameWon = true;
+    for (var i = 0; i < 9; i++) {
         for (var j = 0; j < 9; j++) {
             console.log(typeof(game.boxes[i][j]) + " " + game.boxes[i][j]);
             if (checkEmpty(i,j)) {
                 //color yellow
                 document.getElementById("cell"+i+j).setAttribute("style", "background-color: yellow;");
+                gameWon = false
                 continue;
             }
-            if (!checkBox(i,j) || !checkCol(i,j)) {
+            if (!checkLegalDigit(i,j) ||!checkBox(i,j) || !checkCol(i,j) || !checkRow(i,j)) {
                 //color red
-                document.getElementById("cell"+i+j).setAttribute("style", "background-color: red;");
+                if(document.getElementById("cell"+i+j).getAttribute('disabled') == null) {
+                    document.getElementById("cell"+i+j).setAttribute("style", "background-color: red;");
+                }
+                gameWon = false;
             }
         }
     }
@@ -128,7 +129,7 @@ function checkLegalDigit(box, index) {
     // The digit is stored
     var check_digit = game.boxes[box][index];
     // Then the digit is checked whether it is legal or not
-    if (Number.isInteger(check_digit) && (0 < check_digit < 10)) {
+    if (Number.isInteger(check_digit) && 0 < check_digit && check_digit < 10) {
         return true;
     }
     return false;

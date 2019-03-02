@@ -14,7 +14,7 @@
     margin:0 auto;
     border: 0;
 }
-input[type="text"]:disabled {
+input[type="number"]:disabled {
     background: #e1e1e1;
   }
 input {
