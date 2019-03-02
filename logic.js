@@ -1,10 +1,9 @@
 var game = {boxes:"", _id: "", difficulty: "", dateGenerated: ""};
-var gameStatus = {boxes:"", _id: "", difficulty: "", dateGenerated: ""};
 
 function getSudoku(setting) {
 
     //The URL to which we will send the request
-    var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku';
+    var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudok';
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
     axios.post(url, { difficulty: setting })
@@ -74,25 +73,14 @@ function getSudoku(setting) {
 
 function validate() { /* storing numbers and comparing later */
     getBoard();
-//     var input = 0;
-//     for(var i = 0; i < 9; i++){
-//         input += Number(document.getElementById("0"+i).value); /* stores the sum of the first box*/
-//     } 
-//    // alert(input); /* alert debug to see value of input */
-//    if(input == 45){
-//     alert("Correct"); /* we can compare each box with 45 (1+2+3..+9) when user checks if he's right */
-//     }
-//    else {
-//     alert("Incorrect");
+    validateGame();
     
 }
 function getBoard(){
     for (let i = 0; i < 9; i++){
         for (let j = 0; j < 9; j++){
             var cell = document.getElementById("cell"+i+j);
-            if(cell.getAttribute('disabled') == null){
-                console.log(cell.value);
-            }
+            game.boxes[i][j] = cell.value;
         }
     }
 }
@@ -106,19 +94,20 @@ function getInput(){
 
 // EHJ - Experimental shit
 
-game.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
-[4,2,9,6,5,7,3,1,8],['.','.',8,2,3,1,9,4,7],[7,1,3,8,4,9,5,2,6],
-['.','.',6,'.',3,5,8,4,2],[4,2,3,7,8,9,1,'.','.'],['.',5,8,2,6,4,9,3,7]];
+// game.boxes = [[5,6,4,'.','.',3,2,'.',1],[8,7,2,'.',1,'.',3,9,'.'],[3,9,1,'.','.','.','.','.',5],
+// [4,2,9,6,5,7,3,1,8],['.','.',8,2,3,1,9,4,7],[7,1,3,8,4,9,5,2,6],
+// ['.','.',6,'.',3,5,8,4,2],[4,2,3,7,8,9,1,'.','.'],['.',5,8,2,6,4,9,3,7]];
 
-function validateGame(board) {
-    for (var i = 0; i < 9; i++) {
+function validateGame() {
+    for (var i = 0; i < 1; i++) {
         for (var j = 0; j < 9; j++) {
-            if (checkEmpty(board[i][j])) {
+            console.log(typeof(game.boxes[i][j]) + " " + game.boxes[i][j]);
+            if (checkEmpty(i,j)) {
                 //color yellow
                 console.log("cell(" + i + ", " + j + ") colored yellow");
                 continue;
             }
-            if (!(checkLegalDigit(board[i][j]) || !checkBox(board[i][j]) || !checkCol(board[i][j]) || !checkRow(board[i][j]))) {
+            if (!checkBox(i,j) || !checkCol(i,j)) {
                 //color red
                 console.log("cell(" + i + ", " + j + ") colored red");
             }
