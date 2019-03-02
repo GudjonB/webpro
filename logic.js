@@ -104,12 +104,12 @@ function validateGame() {
             console.log(typeof(game.boxes[i][j]) + " " + game.boxes[i][j]);
             if (checkEmpty(i,j)) {
                 //color yellow
-                console.log("cell(" + i + ", " + j + ") colored yellow");
+                document.getElementById("cell"+i+j).setAttribute("style", "background-color: yellow;");
                 continue;
             }
             if (!checkBox(i,j) || !checkCol(i,j)) {
                 //color red
-                console.log("cell(" + i + ", " + j + ") colored red");
+                document.getElementById("cell"+i+j).setAttribute("style", "background-color: red;");
             }
         }
     }
@@ -186,8 +186,8 @@ function checkCol(box, index) {
     // duplicate digit exists
     for (var i=0; i<3; i++) {
         for (var j=0; j<3; j++) {
-            var _box = i*3+col_num%3;
-            var _index = j*3+col_num%3;
+            var _box = i*3+(box%3);
+            var _index = j*3+(index%3);
             // debug console.log(_box + "," + _index + " = " + game.boxes[_box][_index] + ",   " + check_digit);
             // if a duplicate digit exists false is returned
             if (check_digit == game.boxes[_box][_index] && !(_box == box && _index == index)) {
