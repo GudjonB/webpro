@@ -11,7 +11,8 @@ function getSudoku(setting) {
     .then(function (response) {
         //When successful, print 'Success: ' and the received data
         console.log("Success: ", response.data);
-        game = response.data;
+        game.board = response.data.board;
+        game.sudokuId = response.data._id;
     })
     .catch(function (error) {
         //When unsuccessful, print the error.
