@@ -81,6 +81,9 @@ function getBoard(){
         for (let j = 0; j < 9; j++){
             var cell = document.getElementById("cell"+i+j);
             game.boxes[i][j] = (Number)(cell.value);
+            setTimeout(function(){ /* 5 seconds after we push the validation button we change background color to original */
+                document.getElementById("cell"+i+j).setAttribute("style", "background-color: orig;");
+           }, 5000);
         }
     }
 }
