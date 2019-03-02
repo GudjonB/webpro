@@ -90,9 +90,9 @@ function color() {
     setTimeout(function(){ /* 5 seconds after we push the validation button we change background color to original */
         for (let i = 0; i < 9; i++){
             for (let j = 0; j < 9; j++){
-        document.getElementById("cell"+i+j).setAttribute("style", "background-color: orig;");
-    }
-}
+                document.getElementById("cell"+i+j).setAttribute("style", "background-color: orig;");
+            }
+        }
    }, 5000);
 }
 
