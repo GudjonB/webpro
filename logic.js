@@ -74,6 +74,7 @@ function getSudoku(setting) {
 function validate() { /* storing numbers and comparing later */
     getBoard();
     validateGame();
+    color();
     
 }
 function getBoard(){
@@ -81,11 +82,18 @@ function getBoard(){
         for (let j = 0; j < 9; j++){
             var cell = document.getElementById("cell"+i+j);
             game.boxes[i][j] = (Number)(cell.value);
-            setTimeout(function(){ /* 5 seconds after we push the validation button we change background color to original */
-                document.getElementById("cell"+i+j).setAttribute("style", "background-color: orig;");
-           }, 5000);
+            
         }
     }
+}
+function color() {
+    setTimeout(function(){ /* 5 seconds after we push the validation button we change background color to original */
+        for (let i = 0; i < 9; i++){
+            for (let j = 0; j < 9; j++){
+        document.getElementById("cell"+i+j).setAttribute("style", "background-color: orig;");
+    }
+}
+   }, 5000);
 }
 
 function getInput(){
