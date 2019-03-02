@@ -86,30 +86,7 @@ function validate() { /* storing numbers and comparing later */
 
 function getInput(){
     document.getElementById("sudokuBoard").textContent = "";
-    var setting = document.getElementById("difficultySelection").value;
+    var setting = document.getElementById("difficultySelector").value;
     getSudoku(setting);
 
-
-
-
-    // document.getElementById("sudokuDiv").style.display = "inline";
-    //         var tr = document.createElement("tr");
-    //         var td = document.createElement("td");
-    //         for (var i = 0; i < 2; i++){
-    //             document.getElementById("sudokuBoard").appendChild(div);
-    //             for ( var j = 0; j < 9; j++){
-    //                 let newinputbox = document.createElement("input");
-    //                 newinputbox.setAttribute("type", "text");
-    //                 newinputbox.setAttribute("id", (String)(i)+(String)(j));
-    //                 newinputbox.setAttribute("class", i;
-    //                 if(game.board.boxes[i][j] === '.'){
-    //                     newinputbox.setAttribute("value", "")
-    //                     document.getElementById("sudokuBoard").appendChild(newinputbox);
-    //                 }
-    //                 else {
-    //                     newinputbox.setAttribute("value", game.board.boxes[i][j])
-    //                     document.getElementById("sudokuBoard").appendChild(newinputbox);
-    //                 }
-    //             }
-    //         }
 }
