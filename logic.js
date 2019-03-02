@@ -40,7 +40,7 @@ function getSudoku(setting) {
         
         for(var i = 0; i < 9; i++){
             var div = document.createElement("div");
-            div.setAttribute("class","Box")
+            div.setAttribute("id",(String)(i)+" Box")
             document.getElementById("sudokuBoard").appendChild(div);
             for(var j = 0; j < 3; j++){
                 for(var k = 0; k < 3; k++){
@@ -73,6 +73,7 @@ function getSudoku(setting) {
 function validate() { /* storing numbers and comparing later */
     getBoard();
     var gameWon = validateGame();
+    document.getElementById("WMsg").setAttribute('style','display: inline');
     if (gameWon){
         document.getElementById("WMsg").setAttribute('style','display: inline');
     }

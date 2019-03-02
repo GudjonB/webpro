@@ -1,4 +1,4 @@
-#sudokuBoard {  /* eitthvað til að vinna með */
+#sudokuBoard {  
     display: none;
     width: 366px;
     height: 366px;
@@ -14,6 +14,17 @@
     margin:0 auto;
     border: 0;
 }
+div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    padding: 0;
+    border: solid 1px;
+    border-color: black; 
+}
 input[type="number"]:disabled {
     background: #e1e1e1;
   }
@@ -26,22 +37,13 @@ input {
     border: solid 1px;
     border-color: black;
 }
-.Box {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 120px;
-    height: 120px;
-    padding: 0;
-    border: solid 1px;
-    border-color: black; 
-}
 #resultMsg {
+
     margin:0 auto;
     border: none;
 }
 #WMsg {
     display: none;
+    text-align: center;
     font-size: 3em;
 }
