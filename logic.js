@@ -47,7 +47,7 @@ function getSudoku(setting) {
                 for(var k = 0; k < 3; k++){
                         let newinputbox = document.createElement("input");
                         newinputbox.setAttribute("type", "text");
-                        newinputbox.setAttribute("id", (String)(i)+(String)(j*3+k));
+                        newinputbox.setAttribute("id", "cell"+(String)(i)+(String)(j*3+k));
                         newinputbox.setAttribute("class", i);
                         if(game.boxes[i][j*3+k] === '.'){
                             newinputbox.setAttribute("value", "");
