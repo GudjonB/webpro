@@ -11,11 +11,7 @@
     float: left;
 }
 
-
-
-
 .cell {
-    overflow: hidden;
     width: 33%;
     font-size: 5vw;
     height: 0%;
