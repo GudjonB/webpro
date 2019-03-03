@@ -3,7 +3,7 @@ var game = {boxes:"", _id: "", difficulty: "", dateGenerated: ""};
 function getSudoku(setting) {
 
     //The URL to which we will send the request
-    var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudoku';
+    var url = 'https://veff213-sudoku.herokuapp.com/api/v1/sudok';
 
     //Perform an AJAX POST request to the url, and set the param 'myParam' in the request body to paramValue
     axios.post(url, { difficulty: setting })
@@ -65,16 +65,15 @@ function getSudoku(setting) {
         para.setAttribute("id","sudokuId");
         var id = document.createTextNode((String)(game._id));
         para.appendChild(id);
-        document.getElementById("Game").appendChild(para);
+        document.getElementById("SudokuDiv").appendChild(para);
     });
 }  
 
 function validate() { /* storing numbers and comparing later */
     getBoard();
     var gameWon = validateGame();
-    document.getElementById("WMsg").setAttribute('style','display: inline');
     if (gameWon){
-        document.getElementById("WMsg").setAttribute('style','display: inline');
+        document.getElementById("WMsg").setAttribute('style','display: flex');
     }
     else{
         backgroundcolorReset();
@@ -97,10 +96,12 @@ function backgroundcolorReset() {
             }
         }
    }, 5000);
+   document.getElementById("WMsg").setAttribute('style','display: none');
 }
 
 function getInput(){
     document.getElementById("Game").textContent = "";
+    document.getElementById("WMsg").setAttribute('style','display: none');
     var setting = document.getElementById("difficultySelector").value;
     getSudoku(setting);
 

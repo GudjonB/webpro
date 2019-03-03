@@ -18,15 +18,16 @@
     <h1>Sudoku</h1>
     <br>
     <!-- Clicking this button calls doAjax(), which will do an AJAX request -->
-    <select id="difficultySelector">
-        <option value="easy" selected="selected">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
-    </select>
-    <button type="button" id="generateButton" onclick="getInput()">Click to Get Sudoku Board</button>
-    <button type="button" id="validateButton" onclick="validate()">Check if right</button>
+    <div id="buttons" class="buttons">
+        <select id="difficultySelector">
+            <option value="easy" selected="selected">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+        <button type="button" id="generateButton" onclick="getInput()">Click to Get Sudoku Board</button>
+        <button type="button" id="validateButton" onclick="validate()">Check if right</button>
+    </div>
     <div id="sudokuDiv">
-        <br/>
         <div id="Game" class="game">
 
         </div>
