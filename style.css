@@ -1,54 +1,25 @@
-#sudokuBoard {  
-    display: none;
-    width: 366px;
-    height: 366px;
-    border: solid 1px #ccc;
-    text-align: center;
-    vertical-align: middle;
-    font-weight: bold;
-    color: rgb(51, 94, 204);
+* {
+    box-sizing: border-box;
 }
-#sudokuDiv{
+.game {
+    content: "";
     display: table;
-    align-items: center;
-    margin:0 auto;
-    border: 0;
 }
-div {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    width: 120px;
-    height: 120px;
-    padding: 0;
-    border: solid 1px;
-    border-color: black; 
+
+.box {
+    width: 33%;
+    float: left;
 }
-input[type="number"]:disabled {
-    background: #e1e1e1;
-  }
-input {
-    font-size: 2rem;
+
+
+
+
+.cell {
+    overflow: hidden;
+    width: 33%;
+    font-size: 5vw;
+    height: 0%;
+    padding: 5%;
     text-align: center;
-    width: 38px;
-    height: 38px;
-    padding: 0;
-    border: solid 1px;
-    border-color: black;
-}
-#resultMsg {
-    width: 320px;
-    align-content: center;
-    margin:0 auto;
-    border: none;
-}
-#WMsg {
-    display: none;
-    width: 320px;
-    text-align: center;
-    font-size: 3em;
-}
-#sudokuId{
-    display: none;
+    float: left;
 }
