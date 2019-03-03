@@ -35,27 +35,26 @@ function getSudoku(setting) {
         game.difficulty = setting;
         game.dateGenerated = new Date();
     })
-    .then(function (){
-        document.getElementById("sudokuBoard").style.display = "flex";
-        
+    .then(function (){        
         for(var i = 0; i < 9; i++){
             var div = document.createElement("div");
-            div.setAttribute("id",(String)(i)+" Box")
-            document.getElementById("sudokuBoard").appendChild(div);
+            div.setAttribute("id", "box"+(String)(i));
+            div.setAttribute("class", "box");
+            document.getElementById("Game").appendChild(div);
             for(var j = 0; j < 3; j++){
                 for(var k = 0; k < 3; k++){
                         let newinputbox = document.createElement("input");
                         newinputbox.setAttribute("type", "number");
                         newinputbox.setAttribute("id", "cell"+(String)(i)+(String)(j*3+k));
-                        newinputbox.setAttribute("class", i);
+                        newinputbox.setAttribute("class", "cell");
                         if(game.boxes[i][j*3+k] === '.'){
                             newinputbox.setAttribute("value", "");
-                            document.getElementById((String)(i)+" Box").appendChild(newinputbox);
+                            document.getElementById("box"+(String)(i)).appendChild(newinputbox);
                         }
                         else {
                             newinputbox.setAttribute("disabled",true);
                             newinputbox.setAttribute("value", game.boxes[i][j*3+k]);
-                            document.getElementById((String)(i)+" Box").appendChild(newinputbox);
+                            document.getElementById("box"+(String)(i)).appendChild(newinputbox);
                         }
                 }
                 
@@ -66,7 +65,7 @@ function getSudoku(setting) {
         para.setAttribute("id","sudokuId");
         var id = document.createTextNode((String)(game._id));
         para.appendChild(id);
-        document.getElementById("sudokuBoard").appendChild(para);
+        document.getElementById("Game").appendChild(para);
     });
 }  
 
@@ -101,7 +100,7 @@ function backgroundcolorReset() {
 }
 
 function getInput(){
-    document.getElementById("sudokuBoard").textContent = "";
+    document.getElementById("Game").textContent = "";
     var setting = document.getElementById("difficultySelector").value;
     getSudoku(setting);
 
