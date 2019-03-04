@@ -10,6 +10,7 @@
     display: table;
     margin: 20px auto;
     border: solid 0.1em;
+    border-style: none;
 }
 
 .box {
@@ -29,8 +30,8 @@
 .cell:disabled {
     background: #e1e1e1;
   }
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
+input[type=number]::-webkit-inner-spin-button,  /* this removes the arrow buttons on the number inputs*/
+input[type=number]::-webkit-outer-spin-button { /* and keeps every thing centered */
   -webkit-appearance: none; 
   margin: 0; 
 }

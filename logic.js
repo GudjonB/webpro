@@ -98,6 +98,8 @@ function backgroundcolorReset() {
 }
 
 function getInput(){
+
+    document.getElementById("Game").setAttribute('style','border-style: solid');
     document.getElementById("sudokuId").textContent = "";                   // take out old id 
     document.getElementById("Game").textContent = "";                       // and game
     document.getElementById("Game").setAttribute('style','display: table'); // display the game div
