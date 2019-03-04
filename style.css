@@ -50,5 +50,7 @@ h1 {
 #SudokuDiv{
     display: none;
 }
-
-
+#sudokuId{
+    margin: auto;
+    text-align: center;
+}
