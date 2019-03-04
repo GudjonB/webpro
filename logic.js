@@ -61,11 +61,9 @@ function getSudoku(setting) {
             }
            
         }
-        var para = document.createElement("p");
-        para.setAttribute("id","sudokuId");
+        
         var id = document.createTextNode((String)(game._id));
-        para.appendChild(id);
-        document.getElementById("sudokuDiv").appendChild(para);
+        document.getElementById("sudokuId").appendChild(id);
     });
 }  
 
@@ -100,7 +98,7 @@ function backgroundcolorReset() {
 }
 
 function getInput(){
-    document.getElementById("sudokuDiv").textContent = "";
+    document.getElementById("sudokuId").textContent = "";
     document.getElementById("Game").textContent = "";
     document.getElementById("WMsg").setAttribute('style','display: none');
     var setting = document.getElementById("difficultySelector").value;
