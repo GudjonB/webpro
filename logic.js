@@ -100,6 +100,7 @@ function backgroundcolorReset() {
 }
 
 function getInput(){
+    document.getElementById("sudokuDiv").textContent = "";
     document.getElementById("Game").textContent = "";
     document.getElementById("WMsg").setAttribute('style','display: none');
     var setting = document.getElementById("difficultySelector").value;
