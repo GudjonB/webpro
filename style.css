@@ -4,6 +4,7 @@
 }
 
 .game {
+    display: none;
     width: 35%;
     content: "";
     display: table;
