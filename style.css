@@ -28,6 +28,11 @@
 .cell:disabled {
     background: #e1e1e1;
   }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 .buttons{
     font-size: 1em;
     display: flex;
@@ -45,5 +50,7 @@ h1 {
 #SudokuDiv{
     display: none;
 }
-
+body{
+    background-color: darkolivegreen
+}
 
